@@ -18,6 +18,8 @@ import androidx.appcompat.widget.SwitchCompat
 import ca.uqam.espaceunaw.fragments.TestFragment
 import ca.uqam.espaceunaw.fragments.WebUIFragment
 import ca.uqam.espaceunaw.watcher.UsageStatsWatcher
+import android.webkit.WebView
+
 
 private const val TAG = "MainActivity"
 
@@ -44,6 +46,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
+//        val view = inflater.inflate(R.layout.test_fragment, container, false)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -83,29 +86,31 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
+        val webview: WebView = findViewById<WebView>(R.id.webview)
+        if(webview!= null && webview.canGoBack()) {
+            webview.goBack();// if there is previous page open it
+        }
+        else{
             super.onBackPressed()
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-
-        var collectEnabledKey = getString(R.string.collect_enabled_key)
-        val sharedPref = getPreferences(MODE_PRIVATE)
-        val collectEnabled = sharedPref.getBoolean(collectEnabledKey, true)
-
-        var navCollectSwitch = findViewById<SwitchCompat>(R.id.nav_collect)
-        navCollectSwitch.isChecked = collectEnabled
-        navCollectSwitch?.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean -> with (sharedPref.edit()) {
-            putBoolean(collectEnabledKey, isChecked)
-            apply()
-        }}
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        menuInflater.inflate(R.menu.main, menu)
+//
+//        var collectEnabledKey = getString(R.string.collect_enabled_key)
+//        val sharedPref = getPreferences(MODE_PRIVATE)
+//        val collectEnabled = sharedPref.getBoolean(collectEnabledKey, true)
+//
+//        var navCollectSwitch = findViewById<SwitchCompat>(R.id.nav_collect)
+//        navCollectSwitch.isChecked = collectEnabled
+//        navCollectSwitch?.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean -> with (sharedPref.edit()) {
+//            putBoolean(collectEnabledKey, isChecked)
+//            apply()
+//        }}
+//        return true
+//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
@@ -172,4 +177,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
 }

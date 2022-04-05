@@ -107,22 +107,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.main, menu)
-//
-//        var collectEnabledKey = getString(R.string.collect_enabled_key)
-//        val sharedPref = getPreferences(MODE_PRIVATE)
-//        val collectEnabled = sharedPref.getBoolean(collectEnabledKey, true)
-//
-//        var navCollectSwitch = findViewById<SwitchCompat>(R.id.nav_collect)
-//        navCollectSwitch.isChecked = collectEnabled
-//        navCollectSwitch?.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean -> with (sharedPref.edit()) {
-//            putBoolean(collectEnabledKey, isChecked)
-//            apply()
-//        }}
-//        return true
-//    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.main, menu)
+
+        var collectEnabledKey = getString(R.string.collect_enabled_key)
+        val sharedPref = getPreferences(MODE_PRIVATE)
+        val collectEnabled = sharedPref.getBoolean(collectEnabledKey, true)
+
+        var navCollectSwitch = findViewById<SwitchCompat>(R.id.nav_collect)
+        navCollectSwitch.isChecked = collectEnabled
+        navCollectSwitch?.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean -> with (sharedPref.edit()) {
+            putBoolean(collectEnabledKey, isChecked)
+            apply()
+        }}
+        return true
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will

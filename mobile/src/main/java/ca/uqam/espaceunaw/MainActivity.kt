@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 private const val TAG = "MainActivity"
-var doubleBackToExitPressedOnce = false
 
 const val baseURL = "http://127.0.0.1:5600"
 
@@ -44,7 +43,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
-//        val view = inflater.inflate(R.layout.test_fragment, container, false)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 

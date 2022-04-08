@@ -1,23 +1,22 @@
 package ca.uqam.espaceunaw
 
+import android.app.AlertDialog
 import android.net.Uri
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.core.view.GravityCompat
+import android.util.Log
+import android.view.MenuItem
+import android.webkit.WebView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
-import android.util.Log
-import android.widget.CompoundButton
-import androidx.appcompat.widget.SwitchCompat
 import ca.uqam.espaceunaw.fragments.TestFragment
 import ca.uqam.espaceunaw.fragments.WebUIFragment
 import ca.uqam.espaceunaw.watcher.UsageStatsWatcher
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 private const val TAG = "MainActivity"
 
@@ -83,10 +82,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
+        val webview: WebView = findViewById<WebView>(R.id.webview)
+        if(webview!= null && webview.canGoBack()) {
+            webview.goBack();// if there is previous page open it
+        }
+        else{
+            val builder = AlertDialog.Builder(this)
+            builder.setCancelable(false)
+            builder.setMessage("Do you want to Exit?")
+            builder.setPositiveButton(
+                "Yes"
+            ) { dialog, which -> //if user pressed "yes", then he is allowed to exit from application
+                finish()
+            }
+            builder.setNegativeButton(
+                "No"
+            ) { dialog, which -> //if user select "No", just cancel this dialog and continue with app
+                dialog.cancel()
+            }
+            val alert = builder.create()
+            alert.show()
         }
     }
 
@@ -172,4 +187,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
 }

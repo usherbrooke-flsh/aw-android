@@ -4,10 +4,13 @@ import android.app.AlertDialog
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.webkit.WebView
+import android.widget.CompoundButton
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import ca.uqam.espaceunaw.fragments.TestFragment

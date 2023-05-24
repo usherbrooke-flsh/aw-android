@@ -3,8 +3,5 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/aw-server-rust" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/aw-server-rust/aw-webui" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/aw-server-rust/aw-webui/aw-client-js" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/aw-server-rust/aw-webui/node_modules/aw-client" vcs="Git" />
   </component>
 </project>
